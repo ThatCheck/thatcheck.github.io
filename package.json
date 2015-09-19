@@ -1,0 +1,25 @@
+{
+  "name": "thatcheck.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {
+    "gulp-minify-html": "^1.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThatCheck/thatcheck.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThatCheck/thatcheck.github.io/issues"
+  },
+  "homepage": "https://github.com/ThatCheck/thatcheck.github.io#readme"
+}

@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "0.10"
+script: bash ./deploy.sh
+env:
+  global:
+  - GH_REF: github.com/ThatCheck/thatcheck.github.io.git
+  - secure: "hhYWnVh/laDxXsJUxQWU7K6dOBF+Wz3d2Nt+9W2FwOXRCmhpiNjXXi/d8nyd0c2RoSKHivm2nQPIcn9xxcj1NXAZJXr+39JEsvwv/OkrxCLEDLZes0HlUUjrKoqTz/szj8PWFJT3TCBZTq9GiKFyUasvBjSw8Hl1s0gdqOafv8gCNE83UPbOLVc8EiCS4/5YJP2uiw0n7zNY5DovBzR1svKVeQpCMrSzJERGHJNGGb+to4iIu2v3KP4nyTzAzCNpRp+g0aP16EMJ4wC+8OBtS4YrfmG0lEaHZEh9p3LOG7SicW88B+lBUSuSyaR9ctz+etRRVLZZomu5DpWbsUiDY4+3KTnaKnERQnL8bRGcbojmP9cDa2igj4SBBUqMbZPb6tRGSy5CFbznBo8VYN0/EjL+ayNwPa8hCn0nXsGJgKh3jAMrTHH+F0tT1LlcYI8Q+CySjuRJRTCUEJ4ZoHxUkIwkxmO4AsBX2MrHfZindMrorL+SrUOo7B3OOwn1u4N+sG2yYOBiGM5Aj1C38FZBY7u72Z0cc/divJCBeYEoG+1VzzNq9r1t8Vhor/+DpziiblvtZ9wgmdVm8l/Rl7ZFoynM/rzZ3uoBAfJU4BC57leGcAwOI7RUWQ/H3OtKtFA7kAT/iAl8PQFJUxtXuisjoyTEqtNzqYlnxy28YTs+a7A="

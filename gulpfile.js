@@ -38,7 +38,7 @@ var gulp = require('gulp'),
 
 var dist              = '_site/'
     , dirPublic       = '/'
-    , distAssets      = dist + dirPublic + 'assets/'
+    , distAssets      = './assets/'
     , distStylesheets = distAssets + 'css/'
     , distJavascripts = distAssets + 'js/'
     , distImages      = distAssets + 'img/'

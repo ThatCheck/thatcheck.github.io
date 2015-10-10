@@ -6,7 +6,7 @@ _site
 .sass-cache
 
 ### Jekyll template
-_site/
+#_site/
 .sass-cache/
 .jekyll-metadata
 

@@ -44,7 +44,6 @@ I think you see the benefits of the debounce function.
 I always use the underscore.js debounce function. A example : 
 
 {% highlight js %}
-
 function calculateLayout()
 {
     //some resize function

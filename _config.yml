@@ -9,5 +9,4 @@ permalink : pretty
 # Build settings
 markdown: kramdown
 paginate : 10
-keep_files : ['assets/css/*', 'assets/js/*', 'assets/fonts/*', 'assets/img/*']
-exclude: ['README.md', 'src/', 'node_modules', 'package.json', 'gulpfile.js', '*.command',"bower_components", "bower.json"]
+exclude: ['README.md', 'CNAME', 'deploy.sh', 'src/', 'node_modules', 'package.json', 'gulpfile.js', '*.command',"bower_components", "bower.json"]

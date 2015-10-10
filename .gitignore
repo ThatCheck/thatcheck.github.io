@@ -1,6 +1,6 @@
 ###BOWER
 /bower_components/
-
+assets/
 ###jekyll base
 _site
 .sass-cache

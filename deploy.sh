@@ -6,7 +6,7 @@ rm -rf _site || exit 0;
 mkdir _site;
 
 # run our compile script, discussed above
-bower install
+npm run build
 gulp generate --production
 
 # go to the out directory and create a *new* Git repo

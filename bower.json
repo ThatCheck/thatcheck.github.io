@@ -20,6 +20,7 @@
     "modernizr": "~3.0.0",
     "underscore": "~1.8.3",
     "scrollmagic": "~2.0.5",
-    "bourbon": "~4.2.5"
+    "bourbon": "~4.2.5",
+    "qTip2": "~2.2.1"
   }
 }

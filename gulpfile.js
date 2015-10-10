@@ -32,7 +32,8 @@ var gulp = require('gulp'),
 // Utils
     utils = require('gulp-util'),
     options = require("minimist")(process.argv.slice(2)),
-    addsrc = require('gulp-add-src')
+    addsrc = require('gulp-add-src'),
+    spawn = require('child_process').spawn
     ;
 
 
@@ -139,7 +140,6 @@ gulp.task('js',['js-modernizr'],function () {
 // JEKYLL task
 // <--
 gulp.task('jekyll', ['images', 'js', 'compass'], function (gulpCallBack){
-    var spawn = require('child_process').spawn;
     var jekyll = process.platform === "win32" ? "jekyll.bat" : "jekyll";
     // After build: cleanup HTML
     var jekyll = spawn(jekyll, ['build'], {stdio: 'inherit'});

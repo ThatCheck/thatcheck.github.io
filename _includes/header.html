@@ -3,10 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
-    <meta name="description" content="JavaScript, Symfony and HTML5 engineer.">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <link href="/assets/css/style.css?bust={{ site.time | date: '%s' }}" rel="stylesheet">
     <script src="/assets/js/modernizr.min.js?bust={{ site.time | date: '%s' }}"></script>
+    {% if page.description %}
+      <meta name="description" content="{{ page.description}}" />
+    {% else %}
+      <meta name="description" content="JavaScript, Symfony and HTML5 engineer.">
+    {% endif %}
   </head>
   <body {% if page.data %} data-page="{{ page.data }}"{% endif %} {% if page.class %} class="{{ page.class }}"{% endif %}>
 

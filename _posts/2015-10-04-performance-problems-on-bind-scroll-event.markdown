@@ -3,6 +3,7 @@ layout: post
 title:  "Performance problems on scroll bind event !"
 date:   2015-10-04 14:50:00
 categories: js
+description : The scroll and resize events are one of the most used events, but are among the events that cause the most performance issues. We will do a complete overview on this post. 
 ---
 
 Bind the scroll event is a common practice when you need to develop a timeline or other scroll specific position components. But when you bind this event, you must take into account the performance problems that can result. Many website that is slow when you scroll, and, it's very annoying when you have this jerk' impression. 

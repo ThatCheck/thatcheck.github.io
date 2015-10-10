@@ -3,6 +3,7 @@ layout: post
 title:  "Organize you javascript files for your website!"
 date:   2015-10-04 14:50:00
 categories: js
+description: The organization in a application is one of the most important thing. And the JS organization one of the most complex thing to do. 
 ---
 
 Hi everyone, 

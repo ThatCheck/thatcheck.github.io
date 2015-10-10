@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Organize you javascript files for your website!</title>
+    <meta name="description" content="JavaScript, AngularJS and HTML5 engineer helping build a better web.">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <script src="/assets/js/modernizr.min.js"></script>
+  </head>
+  <body  >
+
+    <div class="sidebar clear">
+      <div class="sidebar__profile">
+        <a href="/">
+          <img src="/assets/img/flo.jpg" alt="Cabirol Florian" class="sidebar__profile-img">
+        </a>
+        <h1 class="sidebar__profile-name">
+          Cabirol Florian
+        </h1>
+        <div class="sidebar__profile-bio clear">
+          <p>
+            <b>Freelancer in Lyon, France.</b><br>
+            Currently in <b>computer 5th engineering school.</b><br>
+            Web development Lover. <br>
+            PHP, Javascript, NodeJs. <br>
+            Symfony, Mysql, NodeJs, MongoDB.<br>
+          </p>
+        </div>
+        <nav class="sidebar__profile-nav">
+          <ul>
+            <li>
+              <a href="/">
+                Posts
+              </a>
+            </li><!--
+            --><li>
+              <a href="/about">
+                About
+              </a>
+            </li><!--
+            --><li>
+              <a href="/feed.xml">
+                RSS
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="social__wrapper">
+            <div class="social-link" title="Twitter"><a href="//www.twitter.com/wedevelopp"> <i class="fa fa-twitter"></i> </a> </div>
+            <div class="social-link" title="GitHub"><a href="//www.github.com/thatcheck"> <i class="fa fa-github"></i> </a></div>
+            <div class="social-link" title="Linkedin"><a href="//www.linkedin.com/in/cabirolflorian"> <i class="fa fa-linkedin"></i> </a></div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="main" role="main">
+          <article class="post clear">
+      <h1 class="post__title">
+        Organize you javascript files for your website!
+      </h1>
+      <div class="post__meta">
+        
+        <a class="post__meta-edit" href="//github.com/thatcheck/thatcheck.github.io/blob/master/_posts/_posts/2015-10-04-organize-your-javascript.markdown">
+          <i class="fa fa-github"></i>
+          Edit this page on GitHub
+        </a>
+        
+        <p>
+          October 04, 2015
+        </p>
+      </div>
+
+      <p>Hi everyone,</p>
+<p>Today we will speak about the organization of your JS assets. I thought for a long time about how I can manage and organize my JS file for a website which is not a SPA.</p>
+<p>And today, I will cover this point.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>Imagine a simple case, like the “About” page on this site. We have, some common JS we need to run on all the site like the qTip2 Libraries for the tooltip extension and some specific JS which run just on the “About” page. Three options come to us naturally :</p>
+<ul>
+  <li>Write all the JS code on a script.js file.</li>
+  <li>Write the specific JS code on the “about” page.</li>
+  <li>Write one JS file for the page and one JS file for the common thing. And add the specific page JS with a <code>&lt;script&gt;</code> tag on the “about” page.</li>
+</ul>
+
+<p>I will explain you why the three options are bad options :</p>
+<ul>
+  <li>The first one, the worst. If you have 100 page with multiple specific javascript, when you do some modification, it’s not really easy. All your code is in one file, it’s just a bad thing in terms of organization and ease of maintainability.</li>
+  <li>The second one, same as a first, write the JS directly in the page is a common bad practice. And you should avoid it.</li>
+  <li>The third one is better than the two others but not the best. You optimize your organization and the maintainability but you need to add, for each page, specific script tags. But you slow down your website because we don’t use the browser’s cache.</li>
+</ul>
+
+<p>So I will present you a method, the method I use on all project which is not a SPA.</p>
+
+<h3 id="organization">Organization</h3>
+<p>The organization of the JS folder will be the following</p>
+
+<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="p">=&gt;</span> JS 
+    <span class="p">=&gt;</span> modules
+        <span class="sr">//</span>place <span class="k">all</span> the module here
+    <span class="p">=&gt;</span> pages
+        <span class="sr">//</span>place <span class="k">all</span> the page here
+    scripts.<span class="nb">js</span></code></pre></div>
+
+<p>I think I don’t need to explain how the folder’s organization. But if it’s not clear for us, don’t hesitate to ask.</p>
+
+<h3 id="js-file">JS File</h3>
+
+<p>So now, the JS file. I use JQuery on my example because a lot of people use it. But you can adapt the method to whatever.</p>
+
+<p><strong>Script.js</strong></p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nb">window</span><span class="p">,</span> <span class="nb">document</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+  
+  <span class="c1">//Run the qtip library on all the website</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[title!=&quot;&quot;]&#39;</span><span class="p">).</span><span class="nx">qtip</span><span class="p">({</span>
+    <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">classes</span><span class="o">:</span> <span class="s1">&#39;qtip-tipsy&#39;</span>
+    <span class="p">},</span>
+    <span class="nx">position</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">my</span><span class="o">:</span> <span class="s1">&#39;bottom center&#39;</span><span class="p">,</span>  <span class="c1">// Position my top left...</span>
+      <span class="nx">at</span><span class="o">:</span> <span class="s1">&#39;top center&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nb">document</span><span class="p">);</span></code></pre></div>
+
+<p><strong>modules/_timeline.js (here we use the Module Pattern)</strong></p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">Timeline</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span><span class="nx">_</span><span class="p">,</span><span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">timelineBlocks</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.cd-timeline-block&#39;</span><span class="p">),</span>
+        <span class="nx">offset</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ScrollMagic</span><span class="p">.</span><span class="nx">Controller</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="c1">//hide timeline blocks which are outside the viewport</span>
+    <span class="kd">var</span> <span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">hideBlocks</span><span class="p">(</span><span class="nx">timelineBlocks</span><span class="p">,</span> <span class="nx">offset</span><span class="p">);</span>
+        <span class="nx">listen</span><span class="p">();</span>
+    <span class="p">};</span>
+
+    <span class="kd">function</span> <span class="nx">listen</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">timelineBlocks</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="nx">element</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">tempoScene</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ScrollMagic</span><span class="p">.</span><span class="nx">Scene</span><span class="p">({</span><span class="nx">triggerElement</span><span class="o">:</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">triggerHook</span><span class="o">:</span> <span class="s2">&quot;onEnter&quot;</span> <span class="p">})</span>
+                <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enter&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+                    <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">triggerElement</span><span class="p">());</span>
+                    <span class="k">if</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.cd-timeline-img&#39;</span><span class="p">).</span><span class="nx">hasClass</span><span class="p">(</span><span class="s1">&#39;is-hidden&#39;</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="nx">element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.cd-timeline-img, .cd-timeline-content&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;is-hidden&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;bounce-in&#39;</span><span class="p">)</span>
+                    <span class="p">}</span>
+                <span class="p">})</span>
+                <span class="p">.</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">controller</span><span class="p">);</span>
+            <span class="nx">scene</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">tempoScene</span><span class="p">);</span>
+        <span class="p">});</span>
+
+
+        <span class="c1">//$(window).on(&#39;scroll&#39;, _.debounce(launchAnimation,200))</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">hideBlocks</span><span class="p">(</span><span class="nx">blocks</span><span class="p">,</span> <span class="nx">offset</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">blocks</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="k">if</span><span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">offset</span><span class="p">().</span><span class="nx">top</span> <span class="o">&gt;</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">()</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span><span class="o">*</span><span class="nx">offset</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.cd-timeline-img, .cd-timeline-content&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;is-hidden&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">init</span> <span class="o">:</span> <span class="nx">init</span>
+    <span class="p">}</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">,</span><span class="nx">_</span><span class="p">,</span><span class="nb">window</span><span class="p">);</span></code></pre></div>
+
+<p><strong>pages/_about.js</strong></p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/*</span>
+<span class="cm">    About page JS module</span>
+<span class="cm"> */</span>
+<span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nb">window</span><span class="p">,</span> <span class="nb">document</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;about&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Timeline</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nb">document</span><span class="p">);</span></code></pre></div>
+
+<h3 id="explanation">Explanation</h3>
+
+<p>Script.js is the base js script of the website. In it, you can add all you website <strong>common</strong> js, do some variable global variable initialization, app common initialization.</p>
+
+<p>After, when you need to define a module (per example, a component or a script you need to run on multiple specific page), use the <strong>Module Pattern</strong> to define it properly (private/public property, private/public function, init method, etc).</p>
+
+<p>To finish, add a JS script per page with a executor-blocker. In my script it’s the verification of the ‘data-page=”about”’ on body tag. Like this, you can restrict your code to run only for this page. And run modules or specific JS.</p>
+
+<h3 id="prod--dev-environment">Prod / Dev Environment</h3>
+<p>So now, when you are on dev env, you need to include all your dependencies, all your modules, the script.js and all page. <strong>In this order</strong> !!</p>
+
+<p>But in prod, you can easily minify all the JS and generate only or two files (vendor and specific code) to take advantage of the browser’s cache functionality. And you reduce the number of request of the browser.</p>
+
+<h3 id="voila-">Voila !!</h3>
+
+<p>I think it’s one of the best way to organize your JS code on no SPA application. Please tell me if you are agree with it or not. And why.</p>
+
+      <div class="social">
+        <div class="social__button">
+          <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+        </div>
+        <div class="social__button">
+          <div id="fb-root"></div>
+          <div class="fb-like" data-send="false" data-layout="button_count"
+          data-width="1" data-show-faces="false" data-action="like"></div>
+        </div>
+        <div class="social__button">
+          <g:plusone size="medium"></g:plusone>
+        </div>
+      </div>
+      <div class="disqus">
+        <div id="disqus_thread"></div>
+      </div>
+    </article>
+
+    <script>
+      var disqus_url = 'http://florian-cabirol.com/js/2015/10/04/organize-your-javascript/';
+      var disqus_title = 'Organize you javascript files for your website!';
+      var disqus_shortname = 'floriancabirol';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.async = dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        document.getElementsByTagName('head')[0].appendChild(dsq);
+      })();
+    </script>
+
+    </div>
+
+    <script src="/assets/js/thatcheck.github.io.min.js"></script>
+
+  </body>
+</html>

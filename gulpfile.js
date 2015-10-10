@@ -32,8 +32,7 @@ var gulp = require('gulp'),
 // Utils
     utils = require('gulp-util'),
     options = require("minimist")(process.argv.slice(2)),
-    addsrc = require('gulp-add-src'),S
-    process = require('process')
+    addsrc = require('gulp-add-src')
     ;
 
 

@@ -2,8 +2,8 @@
 set -e # exit with nonzero exit code if anything fails
 
 # clear and re-create the out directory
-rm -rf out || exit 0;
-mkdir out;
+rm -rf _site || exit 0;
+mkdir _site;
 
 # run our compile script, discussed above
 bower install
@@ -11,6 +11,7 @@ gulp generate --production
 
 # go to the out directory and create a *new* Git repo
 cd _site
+cp ../CNAME ./CNAME
 git init
 
 # inside this git repo we'll pretend to be a new user

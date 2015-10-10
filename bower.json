@@ -1,0 +1,24 @@
+{
+  "name": "thatcheck.github.io",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ThatCheck/thatcheck.github.io",
+  "authors": [
+    "thatcheck <admin.bananaweb@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fontawesome": "~4.4.0",
+    "jquery": "~2.1.4",
+    "modernizr": "~3.0.0",
+    "underscore": "~1.8.3",
+    "scrollmagic": "~2.0.5"
+  }
+}

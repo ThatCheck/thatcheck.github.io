@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% include header.html %}
 
-  {% include head.html %}
-
-  <body>
-
-    {% include header.html %}
-
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
+    <div class="main" role="main">
+      {{ content }}
     </div>
 
-    {% include footer.html %}
+    <script src="/assets/js/thatcheck.github.io.min.js"></script>
 
   </body>
-
 </html>

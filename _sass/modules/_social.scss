@@ -1,0 +1,19 @@
+.social__wrapper{
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+.social-link {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+  line-height: 50px;
+  font-size: 28px;
+  text-align: center;
+  color: #555;
+  overflow: hidden;
+  cursor: pointer;
+}

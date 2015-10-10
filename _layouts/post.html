@@ -1,7 +1,6 @@
 ---
 layout: default
 ---
-
     <article class="post clear">
       <h1 class="post__title">
         {{ page.title }}
@@ -38,7 +37,7 @@ layout: default
     </article>
 
     <script>
-      var disqus_url = {%if page.disqus %}'{{ page.disqus }}'{%else %}'http://florian-cabirol.com{{ page.url }}'{% endif %};
+      var disqus_url = {% if page.disqus %}'{{ page.disqus }}' {%else %}'http://cabirol-florian.com{{ page.url }}'{% endif %};
       var disqus_title = '{{ page.title }}';
       var disqus_shortname = 'floriancabirol';
       (function() {

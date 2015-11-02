@@ -3,6 +3,11 @@ language: node_js
 node_js:
   - '0.12'
 
+before_install:
+  - rvm install 2.0.0
+  - rvm use 2.0.0 --fuzzy
+  - export GEMDIR=$(rvm gemdir)
+
 before_script:
   - npm install -g gulp
   - npm install -g grunt-cli

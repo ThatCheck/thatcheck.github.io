@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Performance problems on scroll bind event !</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link href="/assets/css/style.css?bust=1446472123" rel="stylesheet">
+    <script src="/assets/js/modernizr.min.js?bust=1446472123"></script>
+    
+      <meta name="description" content="The scroll and resize events are one of the most used events, but are among the events that cause the most performance issues. We will do a complete overview on this post." />
+    
+  </head>
+  <body  >
+
+    <div class="sidebar clear">
+      <div class="sidebar__profile">
+        <a href="/">
+          <img src="/assets/img/flo.jpg" alt="Cabirol Florian" class="sidebar__profile-img">
+        </a>
+        <h1 class="sidebar__profile-name">
+          Cabirol Florian
+        </h1>
+        <div class="sidebar__profile-bio clear">
+          <p>
+            <b>Freelancer in Lyon, France.</b><br>
+            Currently in <b>computer 5th engineering school.</b><br>
+            Web development Lover. <br>
+            PHP, Javascript, NodeJs. <br>
+            Symfony, Mysql, NodeJs, MongoDB.<br>
+          </p>
+        </div>
+        <nav class="sidebar__profile-nav">
+          <ul>
+            <li>
+              <a href="/">
+                Posts
+              </a>
+            </li><!--
+            --><li>
+              <a href="/about">
+                About
+              </a>
+            </li><!--
+            --><li>
+              <a href="/feed.xml">
+                RSS
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="social__wrapper">
+            <div class="social-link" title="Twitter"><a href="//www.twitter.com/wedevelopp"> <i class="fa fa-twitter"></i> </a> </div>
+            <div class="social-link" title="GitHub"><a href="//www.github.com/thatcheck"> <i class="fa fa-github"></i> </a></div>
+            <div class="social-link" title="Linkedin"><a href="//www.linkedin.com/in/cabirolflorian"> <i class="fa fa-linkedin"></i> </a></div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="main" role="main">
+          <article class="post clear">
+      <h1 class="post__title">
+        Performance problems on scroll bind event !
+      </h1>
+      <div class="post__meta">
+        
+        <a class="post__meta-edit" href="//github.com/thatcheck/thatcheck.github.io/blob/develop/_posts/2015-10-04-performance-problems-on-bind-scroll-event.markdown">
+          <i class="fa fa-github"></i>
+          Edit this page on GitHub
+        </a>
+        
+        <p>
+          October 04, 2015
+        </p>
+      </div>
+
+      <p>Bind the scroll event is a common practice when you need to develop a timeline or other scroll specific position components. But when you bind this event, you must take into account the performance problems that can result. Many website that is slow when you scroll, and, it’s very annoying when you have this jerk’ impression.</p>
+
+<p>So today I will try to help you with the performance problems on the scroll event and show you how can you resolve it.</p>
+
+<h3 id="why-do-you-have-a-jerk-impression-">Why do you have a jerk impression ?</h3>
+
+<p>The jerk impression doesn’t appear systematically. It’s the result of two things :</p>
+
+<ul>
+  <li>The bind of the scroll event.</li>
+  <li>And a intensive task to paint the website.</li>
+</ul>
+
+<p>The Google Chrome Developer can help you to detect this on the timeline module.</p>
+
+<h3 id="how-i-can-resolve-this-">How I can resolve this ?</h3>
+
+<p>You have three principal way to do this : 
+- Repaint only what you need.
+- Use a debounce function.
+- Use a specific library like ScrollMagic.</p>
+
+<p>I will cover the last two point because, the first really depends of your situation.</p>
+
+<h3 id="use-a-debounce-function">Use a debounce function</h3>
+
+<dl>
+  <dt><em>What is a debounce function ?</em></dt>
+  <dd>
+    <p>A debounce function is a function which limit the rate at which a function can fire.</p>
+  </dd>
+</dl>
+
+<p>So, with your example, you bind the scroll event with a debounce function which run every 200ms. What’s happening ?</p>
+
+<ul>
+  <li>The scroll event is fired, the function run once.</li>
+  <li>The scroll is re-fired directly after =&gt; The function is not fired.</li>
+  <li>The timeout of 200ms is over, the scroll event is fired, the function is run.</li>
+</ul>
+
+<p>I think you see the benefits of the debounce function.</p>
+
+<p>I always use the underscore.js debounce function. A example :</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">calculateLayout</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">//some resize function</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">lazyLayout</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">debounce</span><span class="p">(</span><span class="nx">calculateLayout</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">resize</span><span class="p">(</span><span class="nx">lazyLayout</span><span class="p">);</span></code></pre></div>
+
+<h3 id="use-the-scrollmagic-library">Use the ScrollMagic library</h3>
+
+<p>From <a href="http://scrollmagic.io/">ScrollMagic website</a> :</p>
+
+<p><em>ScrollMagic helps you to easily react to the user’s current scroll position.</em></p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">Timeline</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span><span class="nx">_</span><span class="p">,</span><span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="c1">// your element;</span>
+    <span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ScrollMagic</span><span class="p">.</span><span class="nx">Controller</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ScrollMagic</span><span class="p">.</span><span class="nx">Scene</span><span class="p">({</span><span class="nx">triggerElement</span><span class="o">:</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">triggerHook</span><span class="o">:</span> <span class="s2">&quot;onEnter&quot;</span> <span class="p">})</span>
+                <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enter&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+                    <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">triggerElement</span><span class="p">());</span>
+                    <span class="c1">//Do something when the scroll actiavte the element</span>
+                <span class="p">})</span>
+                <span class="p">.</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">controller</span><span class="p">);</span></code></pre></div>
+
+<p>The ScrollMagic library reduces dramatically the performances problems and wrap a provides a lot of built-in function to simplify the detection of the scrollbar position (Here, you just need to define a Controller and a Scene object, and scrollmagic launch the “OnEnter” callback automatically when the scrollbar is near the element).</p>
+
+<h3 id="voil-">Voilà !</h3>
+
+<p>So now when you bind a event which is call a lot of times (like resize or scroll), think primarily about the performance problems that this can cause and use tweak like <strong>debounce function</strong> or use library (like ScrollMagic for the scroll event).</p>
+
+      <div class="social">
+        <div class="social__button">
+          <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+        </div>
+        <div class="social__button">
+          <div id="fb-root"></div>
+          <div class="fb-like" data-send="false" data-layout="button_count"
+          data-width="1" data-show-faces="false" data-action="like"></div>
+        </div>
+        <div class="social__button">
+          <g:plusone size="medium"></g:plusone>
+        </div>
+      </div>
+      <div class="disqus">
+        <div id="disqus_thread"></div>
+      </div>
+    </article>
+
+    <script>
+      var disqus_url = 'http://cabirol-florian.com/js/2015/10/04/performance-problems-on-bind-scroll-event/';
+      var disqus_title = 'Performance problems on scroll bind event !';
+      var disqus_shortname = 'floriancabirol';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.async = dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        document.getElementsByTagName('head')[0].appendChild(dsq);
+      })();
+    </script>
+
+    </div>
+
+    <script src="/assets/js/thatcheck.github.io.min.js?bust=1446472123"></script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68669846-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
